@@ -10,12 +10,15 @@ dengan database di Aiven.
 app/
   api/products/route.js         -> GET (list), POST (create)
   api/products/[id]/route.js    -> GET (detail), PUT (update), DELETE
-  page.js                       -> Halaman utama (tabel + form)
+  api/categories/route.js       -> GET (list), POST (create)
+  api/categories/[id]/route.js  -> GET (detail), PUT (update), DELETE
+  page.js                       -> Halaman produk (tabel + form)
+  categories/page.js            -> Halaman kategori (tabel + form)
   layout.js
   globals.css
 lib/
   db.js                         -> Koneksi pool MySQL (support SSL Aiven)
-schema.sql                      -> Skema tabel `products`
+schema.sql                      -> Skema tabel `products` dan `categories`
 .env.local.example              -> Contoh environment variables
 ```
 
@@ -95,12 +98,13 @@ Pastikan `.env.local` **tidak** ikut ter-commit (sudah otomatis diabaikan lewat 
 ## Fitur
 
 - **Create**: tambah produk baru lewat form (nama, deskripsi, harga)
-- **Read**: daftar semua produk otomatis dimuat saat halaman dibuka
+- **Read**: daftar produk dan kategori otomatis dimuat saat halaman dibuka
 - **Update**: klik "Edit" pada baris produk untuk mengubah data
 - **Delete**: klik "Hapus" untuk menghapus produk (dengan konfirmasi)
+- **Kategori**: tambah, lihat, ubah, dan hapus kategori dari halaman `/categories`
 
 ## Catatan
 
 - Free tier Aiven MySQL bisa nonaktif otomatis setelah periode idle tertentu — kamu akan mendapat notifikasi email sebelum itu terjadi.
-- Kalau ingin menambah kolom atau tabel baru, cukup ubah `schema.sql` dan sesuaikan query di `app/api/products/`.
+- Jika mengubah struktur tabel, sesuaikan `schema.sql` dan query API terkait.
 - Untuk validasi input yang lebih ketat atau autentikasi (login admin), beri tahu saya — bisa ditambahkan.

@@ -92,13 +92,22 @@ export default function Home() {
 
   return (
     <main>
-      <h1>CRUD Produk</h1>
-      <p className="subtitle">Next.js + MySQL (Aiven)</p>
+      <header className="page-header">
+        <div>
+          <p className="eyebrow">KATALOG</p>
+          <h1>Produk</h1>
+          <p className="subtitle">Kelola produk yang tersimpan di MySQL.</p>
+        </div>
+        <nav className="page-nav" aria-label="Navigasi utama">
+          <a href="/" aria-current="page">Produk</a>
+          <a href="/categories">Kategori</a>
+        </nav>
+      </header>
 
-      {error && <div className="error-box">{error}</div>}
+      {error && <div className="error-box" role="alert">{error}</div>}
 
       <div className="card">
-        <h3>{editingId ? 'Edit Produk' : 'Tambah Produk Baru'}</h3>
+        <h2>{editingId ? 'Edit Produk' : 'Tambah Produk Baru'}</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-row">
             <label htmlFor="name">Nama Produk</label>
