@@ -12,13 +12,14 @@ app/
   api/products/[id]/route.js    -> GET (detail), PUT (update), DELETE
   api/categories/route.js       -> GET (list), POST (create)
   api/categories/[id]/route.js  -> GET (detail), PUT (update), DELETE
-  page.js                       -> Halaman produk (tabel + form)
-  categories/page.js            -> Halaman kategori (tabel + form)
+  page.js                       -> Halaman produk dan kategori (form + tabel)
   layout.js
   globals.css
 lib/
   db.js                         -> Koneksi pool MySQL (support SSL Aiven)
 schema.sql                      -> Skema tabel `products` dan `categories`
+migrations/
+  20261019_add_product_category.sql -> Relasi kategori pada tabel `products`
 .env.local.example              -> Contoh environment variables
 ```
 
@@ -101,10 +102,11 @@ Pastikan `.env.local` **tidak** ikut ter-commit (sudah otomatis diabaikan lewat 
 - **Read**: daftar produk dan kategori otomatis dimuat saat halaman dibuka
 - **Update**: klik "Edit" pada baris produk untuk mengubah data
 - **Delete**: klik "Hapus" untuk menghapus produk (dengan konfirmasi)
-- **Kategori**: tambah, lihat, ubah, dan hapus kategori dari halaman `/categories`
+- **Kategori**: kelola kategori dari halaman produk; pilih kategori saat membuat atau mengubah produk
 
 ## Catatan
 
 - Free tier Aiven MySQL bisa nonaktif otomatis setelah periode idle tertentu — kamu akan mendapat notifikasi email sebelum itu terjadi.
 - Jika mengubah struktur tabel, sesuaikan `schema.sql` dan query API terkait.
+- Untuk database yang sudah ada, jalankan SQL di `migrations/20261019_add_product_category.sql` satu kali agar produk terhubung ke kategori. Produk lama tetap ada dan akan berstatus belum dikategorikan.
 - Untuk validasi input yang lebih ketat atau autentikasi (login admin), beri tahu saya — bisa ditambahkan.

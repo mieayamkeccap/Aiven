@@ -96,12 +96,6 @@ export async function DELETE(request, { params }) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    if (error.code === 'ER_ROW_IS_REFERENCED_2') {
-      return NextResponse.json(
-        { error: 'Kategori tidak bisa dihapus karena masih digunakan' },
-        { status: 409 }
-      );
-    }
     console.error(error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
